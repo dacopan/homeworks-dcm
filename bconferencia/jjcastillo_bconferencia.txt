@@ -1,0 +1,1 @@
+[{"nombre":"Juan León Mera","asientos":33,"conferencias":[]},{"nombre":"Antonio Salgado","asientos":27,"conferencias":[]}]
