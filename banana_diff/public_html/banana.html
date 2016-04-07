@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+        <script src="colors.js"></script>
+
+        <style>
+            .cubo{
+                width: 20px;
+                height: 20px;
+                display: inline-block;
+                margin-right: 5px;
+            }
+            .cubo2{
+                width: 20px;
+                height: 20px;
+                display: block;
+                margin-right: 5px;
+            }
+            .rgb{
+                width: 90px;
+                margin-right: 5px;
+                display: inline-block;
+            }
+            .res{
+                margin-right: 5px;
+                display: inline-block;
+            }
+
+            .bool{
+                display: inline-block;
+            }
+        </style>
+
+
+
+
+
+    </head>
+    <body>
+        <div style="width:450px;height: 60px;margin: auto;background: linear-gradient(90deg, rgb(0, 128, 0) 0%, rgb(255, 255, 0) 62%, rgb(69, 55, 14) 100%, rgb(0, 255, 0) 146%);"></div>
+        <div id="result" style="display: inline-block; width: 300px">
+
+        </div>
+        <div id="result2" style="display: inline-block; width: 1000px;vertical-align: top;">
+
+        </div>
+        <script>
+
+            if (!String.prototype.format) {
+                String.prototype.format = function () {
+                    var args = arguments;
+                    return this.replace(/{(\d+)}/g, function (match, number) {
+                        return typeof args[number] != 'undefined'
+                                ? args[number]
+                                : match
+                                ;
+                    });
+                };
+            }
+
+
+            function rounded(num) {
+                return Math.round(num);
+            }
+        </script>
+
+        <script>
+
+            var valid_colors = {//en diff_color2 es usado como breakpoints, en diff_color1 es usado simple mente como enum (vagancia de no cambiar el algoritmo)
+                green: {r: 110, g: 255, b: 13},
+                yellow: {r: 243, g: 255, b: 5},
+                brown: {r: 96, g: 63, b: 54}, //96, 63, 54
+                primer_verde: {r: 110, g: 255, b: 13}
+            };
+
+            function is_green(c1) {//210,255,13 //64,105,8 //no 218,150,0
+                var R = c1.r, G = c1.g, B = c1.b;
+                return R < 220 && // make sure R is high
+                        G > 50 && // make sure G & B are relatively high
+                        B < 50 &&
+                        G > R &&
+                        G > B;
+            }
+
+            function is_yellow(c1) {//230,250,0 //255,203,0 //100,105,10 //255,255,69
+                //230,202,95  249,207,61
+                var R = c1.r, G = c1.g, B = c1.b;
+                return R > 100 && // make sure R is high
+                        G > 100 && // make sure G & B are relatively high
+                        B < 120 &&
+                        Math.abs(G - R) < 40;
+            }
+
+            function is_brown(c1) {
+                var R = c1.r, G = c1.g, B = c1.b;
+                return R < 100 && // make sure R is high
+                        G < 100 && // make sure G & B are relatively high
+                        B < 20 &&
+                        Math.abs(G - R) < 40;
+            }
+
+            function diff_color2(c1, c2) {//not use
+                var threshold = 180;
+                var r = c1.r - c2.r,
+                        g = c1.g - c2.g,
+                        b = c1.b - c2.b;
+                var _res = (r * r + g * g + b * b);
+                return {b: (_res <= (threshold * threshold)), p: _res};
+            }
+
+            function diff_color(c1, c2) {
+                var _res = false;
+                if (c1 === valid_colors.green || c1 === valid_colors.primer_verde) {
+                    _res = is_green(c2);
+                } else if (c1 === valid_colors.yellow) {
+                    _res = is_yellow(c2);
+                } else {
+                    _res = is_brown(c2);
+                }
+                return {b: (_res), p: _res};
+            }
+
+            function banana1(colors) {
+                var use_gamma = true;//if true usa diff_color1 para comparar con color anterior, caso contrario no compara con color anterior
+                var banana_estado = 1;//estdo de la banana 1:inmaduro, 2:maduro, 3:podrido
+                primer_verde = get_primer_verde(colors); //obtengo primer verde
+                valid_colors.primer_verde = primer_verde.color; //guardo primer verde como color valido
+
+                var i = primer_verde.index; //index en donde esta el primer verde    
+                var limit = colors.length - 1;
+                var last_valid = valid_colors.primer_verde;
+                for (; i < limit; ) {//itero desde el primer verde hasta el el ultimo (-1 xq estoy aumentando i++ al inicio)
+                    i++;
+                    var _c = colors[i];//traigo el color del JSON de muestras
+
+                    var c = {r: _c[0], g: _c[1], b: _c[2]}; // construyo el JSON del color actual.
+
+                    //temp
+                    // calculo distancia entre el color anterior (last_valid) y el actual
+                    var diff_last = diff_color2(last_valid, c);
+
+                    if (!diff_last.b && use_gamma) {//vario mucho, de bien verde no pudo estar de una bien amarillo o podrido
+                        _c = {c: c, v: false}; //descarto dato
+                    } else {//si la distancia entre los colores no es mucha, es decir no vario mucho el color es valido
+
+
+
+
+                        //start valid
+                        if (banana_estado === 1) {//esta en estado inmaduro (verde)
+
+                            var g_diff = diff_color(valid_colors.primer_verde, c);
+                            if (g_diff.b) {//esta inmaduro, color actual parecido al primer verde
+                                last_valid = c;
+                                _c = {c: c, v: true}; //guardo el color modificado, slo para despues imprimir bonito
+
+                            } else {//no esta verde entonces pruebo si esta amarillento(maduro)
+
+                                var y_diff = diff_color(valid_colors.yellow, c);
+                                if (y_diff.b) {//esta amarillento, ya maduro
+                                    last_valid = c;
+                                    _c = {c: c, v: true, msg: 'ya maduró'};
+                                    banana_estado = 2;
+                                } else {//no esta ni verde ni amarillo, entonces dato erroneo
+                                    _c = {c: c, v: false};
+                                }
+
+                            }
+
+                        } else if (banana_estado === 2) {//banana en estado maduro (amarillo)
+
+                            var y_diff = diff_color(valid_colors.yellow, c);
+                            if (y_diff.b) {//esta amarillento, sigue maduro
+                                last_valid = c;
+                                _c = {c: c, v: true};
+                                banana_estado = 2;
+                            } else {//no esta amarillo entonces pruebo si esta podrido(brown)
+                                var b_diff = diff_color(valid_colors.brown, c);
+                                if (b_diff.b) {//esta brown, este pto platano ya valió
+                                    last_valid = c;
+                                    _c = {c: c, v: true, msg: 'ya valió'};
+                                    banana_estado = 3;
+                                } else {//no esta ni amarillo ni podrido, entonces dato erroneo
+                                    _c = {c: c, v: false};
+                                }
+                            }
+                        } else if (banana_estado === 3) {//banana ya esta podrida...
+                            var b_diff = diff_color(valid_colors.brown, c);
+                            if (b_diff.b) {//esta brown, este pto platano ya valió
+                                last_valid = c;
+                                _c = {c: c, v: true, msg: 'Tanta hambre en el mundo. y dejas podrir un platano?'};
+                                banana_estado = 3;
+                            } else {//no esta podrido, entonces dato erroneo
+                                _c = {c: c, v: false};
+                            }
+                            //break;
+                        } else {
+
+                        }
+                        //end valid
+
+                    }//end if temp
+                    colors[i] = _c;
+
+                }
+            }
+
+            function get_primer_verde(colors) {
+                for (var i = 0; i < colors.length; ) {
+                    var _c = colors[i];
+                    var c = {r: _c[0], g: _c[1], b: _c[2]};
+
+                    var diff = diff_color(valid_colors.green, c);
+                    if (diff.b) {
+                        _c = {c: c, v: true};
+                        colors[i] = _c;
+                        return {color: c, index: i};
+                    } else {
+                        _c = {c: c, v: false};
+                        colors[i] = _c;
+                        i++;
+                    }
+                }
+            }
+
+            function print_result_colors(colors, target) {
+                for (var i = 0; i < colors.length; i++) {
+                    var c = colors[i];
+                    var color = c.c;
+                    if (c.v) {//color no fue desechado, lo imprimo
+                        var res = [
+                            '<div class="cubo" style="background-color:rgb({0},{1},{2})"></div>',
+                            '{0},{1},{2} | {3}',
+                            '<br/>'
+                        ];
+                        var _res = res.join('').format(color.r, color.g, color.b, JSON.stringify(c));
+                    } else {
+                        //var _res = '<div class="cubo"></div><br/>';
+                        var _res = '';
+                    }
+
+                    $(_res).appendTo($('#' + target));
+                }
+            }
+
+
+            function print_colors(colors, target) {
+                for (var i = 0; i < colors.length; i++) {
+                    var c = colors[i];
+                    if (c) {
+                        var r2 = c[0], g2 = c[1], b2 = c[2];
+                        var result = c[3];
+                        var res = [
+                            '<div class="cubo" style="background-color:rgb({0},{1},{2})"></div>',
+                            '{0},{1},{2}',
+                            '<br/>'
+                        ];
+                        var _res = res.join('').format(r2, g2, b2);
+                    } else {
+                        var _res = '<div class="cubo"></div><br/>';
+                    }
+
+                    $(_res).appendTo($('#' + target));
+                }
+            }
+
+
+
+            print_colors(colors, 'result');
+
+            banana1(colors);
+
+            print_result_colors(colors, 'result2');
+
+
+
+
+        </script>
+
+
+    </body>
+</html>
