@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import org.controlsfx.control.textfield.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?scenebuilder-stylesheet JMetroDarkTheme.css?>
+<?import io.dacopancm.styles.jmetro8.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.collections.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="background1" stylesheets="@JMetroDarkTheme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.dacopancm.socketdcm.view.InboxTabController">
+    <children>
+        <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="600.0" prefViewportHeight="800.0" prefViewportWidth="600.0" prefWidth="600.0" styleClass="background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <content>
+                <VBox prefHeight="400.0" prefWidth="600.0" styleClass="background1" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <Label fx:id="title" styleClass="header" text="Archivos Recibidos" />
+                  <HBox alignment="CENTER_LEFT">
+                     <children>  
+                               
+                              <Button fx:id="openfolder" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#showFolder" style="-fx-background-radius: 5em; -fx-border-radius: 10em; -fx-min-height: 49px; -fx-min-width: 50px; -fx-padding: 10px;">
+                                          <graphic>
+                                              <FontAwesomeIcon fill="WHITE" glyphName="FOLDER" size="1.6em" />
+                                          </graphic>
+                                      </Button>
+                              <Label fx:id="folderx" style="-fx-font-size: 14; -fx-text-fill: #c1c1c1;" styleClass="header" text="C://fwopkdpsdksp/sfksdpofs/fsfnsksd">
+                                  <VBox.margin>
+                                      <Insets top="20.0" />
+                                  </VBox.margin>
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                              </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                        
+                        <Separator prefWidth="200.0" />
+                        <ListView fx:id="filesList" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">   
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="One" />
+                                    <String fx:value="Two" />
+                                    <String fx:value="Three" />
+                                    <String fx:value="Four" />
+                                    <String fx:value="Five" />
+                                </FXCollections>
+                            </items>
+                        </ListView>
+                    </children>
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </padding>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>

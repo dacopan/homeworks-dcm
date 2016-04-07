@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?scenebuilder-stylesheet JMetroDarkTheme.css?>
+<?import io.dacopancm.styles.jmetro8.*?>
+
+<AnchorPane id="AnchorPane" minWidth="400.0" prefHeight="800.0" prefWidth="400.0" styleClass="background1" stylesheets="@JMetroDarkTheme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.dacopancm.socketdcm.view.SettingsClientTabPageController">
+    <children>
+        <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="600.0" prefViewportHeight="800.0" prefViewportWidth="600.0" prefWidth="600.0" styleClass="background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <content>
+                <VBox prefHeight="400.0" prefWidth="600.0" styleClass="background1" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <Label styleClass="header" text="Preferencias" />   
+                   
+                   
+                        <Label style="-fx-font-size: 28;" styleClass="header" text="Cliente">
+                            <VBox.margin>
+                                <Insets top="20.0" />
+                            </VBox.margin>
+                        </Label>
+                        <Separator prefWidth="200.0" />   
+                        <Label styleClass="item-title" text="Keep-Alive">
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </VBox.margin>
+                        </Label>
+                        <ToggleSwitch fx:id="clt_keppalive" turnOffText="Desactivado" turnOnText="Activado" />
+                      
+                        <HBox>
+                            <children>
+                                <Label styleClass="item-title" text="Buffer:">
+                                    <opaqueInsets>
+                                        <Insets />
+                                    </opaqueInsets>
+                                </Label>
+                            
+                                <Label fx:id="clt_buffer_val" styleClass="item-title" text="32">
+                                    <opaqueInsets>
+                                        <Insets />
+                                    </opaqueInsets>
+                                    <VBox.margin>
+                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                    </VBox.margin>
+                                    <HBox.margin>
+                                        <Insets left="10.0" />
+                                    </HBox.margin>
+                                </Label>
+                            </children>
+                        </HBox>
+                        <Slider fx:id="clt_buffer" blockIncrement="8" majorTickUnit="248.0" max="2048" min="4" minorTickCount="30" showTickLabels="true" showTickMarks="true" snapToTicks="true" styleClass="slider">
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                        </Slider>
+                        <HBox>
+                            <children>
+                                <Label layoutX="35.0" layoutY="379.0" styleClass="item-title" text="Timeout ">
+                                    <opaqueInsets>
+                                        <Insets />
+                                    </opaqueInsets>
+                                </Label>
+                              
+                              
+                                <Label fx:id="clt_timeout_val" styleClass="item-title" text="0">
+                                    <opaqueInsets>
+                                        <Insets />
+                                    </opaqueInsets>
+                                    <VBox.margin>
+                                        <Insets bottom="5.0" left="5.0" right="5.0" top="20.0" />
+                                    </VBox.margin>
+                                    <HBox.margin>
+                                        <Insets left="10.0" />
+                                    </HBox.margin>
+                                </Label>
+                                <Label layoutX="10.0" layoutY="10.0" styleClass="item-title" text=" (ms)">
+                                    <opaqueInsets>
+                                        <Insets />
+                                    </opaqueInsets>
+                                </Label>
+                            </children>
+                            <opaqueInsets>
+                                <Insets />
+                            </opaqueInsets>
+                            <VBox.margin>
+                                <Insets top="20.0" />
+                            </VBox.margin>
+                        </HBox>
+                        <Slider fx:id="clt_timeout" blockIncrement="100" majorTickUnit="400.0" max="20000" min="0" minorTickCount="100" showTickLabels="true" showTickMarks="true" snapToTicks="true" styleClass="slider">
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                        </Slider>
+                        
+                        <CheckBox fx:id="clt_reuseaddress" layoutX="35.0" layoutY="497.0" mnemonicParsing="false" styleClass="item-title" text="Reuse Address">
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+                            </VBox.margin>
+                        </CheckBox> 
+                        
+                        <CheckBox fx:id="clt_delay" mnemonicParsing="false" styleClass="item-title" text="Buffering Delay">
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="20.0" />
+                            </VBox.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="clt_urgen" disable="true" layoutX="35.0" layoutY="456.0" mnemonicParsing="false" styleClass="item-title" text="Urgent Data">
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+                            </VBox.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="clt_lingering" layoutX="35.0" layoutY="497.0" mnemonicParsing="false" styleClass="item-title" text="Lingering after close">
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+                            </VBox.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="clt_broadcast" disable="true" layoutX="35.0" layoutY="509.0" mnemonicParsing="false" styleClass="item-title" text="Broadcast Permission">
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+                            </VBox.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="clt_gzip" layoutX="35.0" layoutY="509.0" mnemonicParsing="false" styleClass="item-title" text="Usar Gzip">
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+                            </VBox.margin>
+                        </CheckBox>
+                  <Label styleClass="item-title" text="Performance-Based Protocol Selection, aún no implementado en java." wrapText="true">
+                     <VBox.margin>
+                        <Insets left="5.0" />
+                     </VBox.margin>
+                  </Label>
+                                                
+                        <HBox alignment="BOTTOM_RIGHT" spacing="10.0">
+                            <children>
+                                <Button cancelButton="true" layoutX="478.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleReset" text="Resetear" textAlignment="RIGHT" />
+                                <Button cancelButton="true" layoutX="478.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleDefect" text="Por defecto" textAlignment="RIGHT" />
+                                <Button defaultButton="true" mnemonicParsing="false" onAction="#handleSave" text="Guardar" textAlignment="RIGHT" />
+                            </children>
+                            <opaqueInsets>
+                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                            </opaqueInsets>
+                            <VBox.margin>
+                                <Insets top="20.0" />
+                            </VBox.margin>
+                        </HBox>   
+                    </children>
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </padding>
+                </VBox>
+            </content>
+        </ScrollPane>
+       
+    </children>
+</AnchorPane>

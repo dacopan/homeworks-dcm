@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import io.dacopancm.styles.jmetro8.*?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="874.0" style="-fx-background-color: #154899;" stylesheets="@JMetroDarkTheme.css" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.dacopancm.socketdcm.view.PlayerDialogController">
+    
+    <children>
+        <VBox maxHeight="490.0" maxWidth="800.0" minHeight="490.0" minWidth="500.0" prefHeight="490.0" prefWidth="800.0" GridPane.columnIndex="1" GridPane.rowIndex="1" StackPane.alignment="CENTER">
+            <children>
+                <Label fx:id="titlex" style="-fx-font-size: 32;" styleClass="header" text="Reproducir Streaming" />
+                <HBox alignment="CENTER" styleClass="item-title">
+                    <children>
+                        <Label fx:id="timerx" alignment="CENTER" style="-fx-font-size: 22px;" styleClass="header" text="--:--" />
+                        <Label alignment="CENTER" style="-fx-font-size: 22px;" styleClass="header" text="/" />
+                        <Label fx:id="counter" alignment="CENTER" style="-fx-font-size: 22px;" styleClass="header" text="00:00" />
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" styleClass="item-title">
+                    <children>                        
+                        <Label fx:id="state" alignment="CENTER" style="-fx-font-size: 22px;" styleClass="header" text="00:00:00" />
+                    </children>
+                </HBox>
+            <StackPane prefHeight="277.0" prefWidth="760.0">
+               <children>
+                  <HBox fx:id="audioWrap" alignment="CENTER">
+                     <children>
+                        <FontAwesomeIcon fill="WHITE" glyphName="MUSIC" size="18em" />
+                     </children>
+                  </HBox>
+                      <Pane fx:id="playerHolder">
+                    
+                </Pane>
+               </children>
+            </StackPane>
+                <HBox alignment="BOTTOM_RIGHT" spacing="5.0">
+                    <children>                        
+                        <Button cancelButton="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleCancel" text="Finalizar" />
+                    </children>
+                    <padding>
+                        <Insets top="30.0" />
+                    </padding>
+                </HBox>
+            </children>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" />
+            </padding>
+        </VBox>
+        <HBox fx:id="progressxWrap" alignment="CENTER" style="-fx-background-color: rgba(0,0,0,0.6);">
+            <children>
+                <ProgressIndicator fx:id="progressx" maxHeight="250.0" minWidth="200.0" progress="0.19">
+                    <StackPane.margin>
+                        <Insets />
+                    </StackPane.margin>
+                </ProgressIndicator>
+            </children>
+        </HBox>
+    </children>
+</StackPane>

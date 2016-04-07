@@ -1,0 +1,11 @@
+<FindBugsFilter>
+    <Match>
+        <Package name="~.*\.socketdcm\.net"/>
+       
+       
+
+    </Match>
+    
+    
+
+</FindBugsFilter>

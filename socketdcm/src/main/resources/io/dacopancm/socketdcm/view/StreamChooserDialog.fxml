@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import io.dacopancm.styles.jmetro8.*?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="874.0" style="-fx-background-color: #154899;" stylesheets="@JMetroDarkTheme.css" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.dacopancm.socketdcm.view.StreamChooserDialogController">
+    
+    <children>
+        <VBox maxHeight="490.0" maxWidth="800.0" minHeight="490.0" minWidth="500.0" prefHeight="490.0" prefWidth="800.0" GridPane.columnIndex="1" GridPane.rowIndex="1" StackPane.alignment="CENTER">
+            <children>
+                <Label style="-fx-font-size: 32;" styleClass="header" text="Reproducir Streaming" />
+                <HBox alignment="CENTER">
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                    <children>
+                        <TextField fx:id="ipIn" promptText="IP" />
+                        <Label alignment="CENTER" style="-fx-font-size: 22px;" styleClass="header" text=":" />
+                        <NumberTextField fx:id="portIn" layoutX="316.0" layoutY="10.0" maxWidth="70.0" promptText="Puerto">                            
+                        </NumberTextField>
+                        <Button fx:id="getBut" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleGet" style="-fx-background-radius: 5em; -fx-border-radius: 10em; -fx-min-height: 49px; -fx-min-width: 50px; -fx-padding: 10px;">
+                                    <graphic>
+                                        <FontAwesomeIcon fill="WHITE" glyphName="CLOUD_DOWNLOAD" size="1.6em" />
+                                    </graphic>
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                                </Button>
+                    </children>
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
+                </HBox>
+                <HBox alignment="CENTER" style="-fx-border-width: 2; -fx-border-color: #e1e1e1;" styleClass="item-title">
+                    <children>
+                        <Label fx:id="rtspIn" alignment="CENTER" style="-fx-font-size: 22px;" styleClass="header" text="RTSP" />
+                    </children>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+                </HBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <ListView fx:id="listStreams" maxWidth="350.0" prefHeight="200.0" prefWidth="350.0" style="-fx-background-color: transparent;">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </ListView>
+               </children>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </HBox>
+                <HBox alignment="BOTTOM_RIGHT" spacing="5.0">
+                    <children>
+                        <Button fx:id="connectBut" defaultButton="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleConnect" text="Enviar" />
+                        <Button cancelButton="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleCancel" text="Cancelar" />
+                    </children>
+               <padding>
+                  <Insets top="30.0" />
+               </padding>
+                </HBox>
+            </children>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" />
+            </padding>
+        </VBox>
+      <HBox fx:id="progressxWrap" alignment="CENTER" style="-fx-background-color: rgba(0,0,0,0.6);">
+         <children>
+            <ProgressIndicator fx:id="progressx" maxHeight="250.0" minWidth="200.0" progress="0.19">
+               <StackPane.margin>
+                  <Insets />
+               </StackPane.margin>
+            </ProgressIndicator>
+         </children>
+      </HBox>
+    </children>
+</StackPane>

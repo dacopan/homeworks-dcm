@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import io.dacopancm.styles.jmetro8.*?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="874.0" style="-fx-background-color: #154899;" stylesheets="@JMetroDarkTheme.css" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.dacopancm.socketdcm.view.AudioRecDialogController">
+    
+    <children>
+        <VBox maxHeight="280.0" maxWidth="800.0" minHeight="250.0" minWidth="500.0" prefHeight="280.0" prefWidth="800.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <children>
+                <Label style="-fx-font-size: 32;" styleClass="header" text="Grabar y enviar audio" />
+                <HBox alignment="CENTER" styleClass="item-title">
+                    <children>
+                        <Label fx:id="counter" alignment="CENTER" style="-fx-font-size: 22px;" styleClass="header" text="00:00:00" />
+                    </children>
+                </HBox>
+                <StackPane prefHeight="150.0" prefWidth="200.0">
+                    <children>                                
+                        <Button fx:id="recButton" mnemonicParsing="false" onAction="#handleRec" styleClass="record-but" textFill="RED">
+                            <graphic>
+                                <FontAwesomeIcon id="record-icon" fill="#d64826" glyphName="MICROPHONE" size="3.5em" styleClass="icox" />
+                            </graphic>
+                        </Button>
+                    </children>
+                </StackPane>
+                <HBox alignment="CENTER">
+                    <VBox.margin>
+                        <Insets top="10.0" />
+                    </VBox.margin>
+                    <children>
+                        <TextField fx:id="ipIn" promptText="IP" />
+                        <Label alignment="CENTER" style="-fx-font-size: 22px;" styleClass="header" text=":" />
+                        <NumberTextField fx:id="portIn" layoutX="316.0" layoutY="10.0" maxWidth="70.0" promptText="Puerto">                            
+                        </NumberTextField>
+                    </children>
+                </HBox>
+                <HBox alignment="BOTTOM_RIGHT" spacing="5.0">
+                    <children>
+                        <Button fx:id="sendBut" defaultButton="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleOk" text="Enviar" />
+                        <Button cancelButton="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleCancel" text="Cancelar" />
+                    </children>
+                </HBox>
+            </children>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" />
+            </padding>
+        </VBox>
+    </children>
+</StackPane>
