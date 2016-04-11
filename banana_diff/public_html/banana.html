@@ -46,11 +46,83 @@ and open the template in the editor.
 
     </head>
     <body>
+        <input type="text" placeholder="tamaño en pixeles" value="20" id="sizex"/><button id="sizeBut" onclick="changeSize();">Cambiar Tamaño</button>
+        <br/>
+        <br/>
+        <button onclick="loadFullData();" id="fullBtn">Usar todos los datos</button>
+        <script>
+            var nodex = null;
+            function changeSize() {
+                var s = document.getElementById('sizex');
+                var v = s.value;
+                if (isInt(v)) {
+                    var p = parseInt(v);
+                    nodex = setStyle(".cubo{width: " + v + "px;height:" + v + "px;display: inline-block;margin-right: 5px;}", nodex);
+                } else {
+                    alert('solo enteros');
+                }
+
+            }
+
+            function isInt(value) {
+                return !isNaN(value) &&
+                        parseInt(Number(value)) == value &&
+                        !isNaN(parseInt(value, 10));
+            }
+
+            function setStyle(cssText) {
+                var sheet = document.createElement('style');
+                sheet.type = 'text/css';
+                /* Optional */ window.customSheet = sheet;
+                (document.head || document.getElementsByTagName('head')[0]).appendChild(sheet);
+                return (setStyle = function (cssText, node) {
+                    if (!node || node.parentNode !== sheet)
+                        return sheet.appendChild(document.createTextNode(cssText));
+                    node.nodeValue = cssText;
+                    return node;
+                })(cssText);
+            }
+            function loadFullData() {
+                var file = 'colors_test.js';
+                loadJS(file, function () {
+                    document.getElementById('fullBtn').remove();
+                    clearChilds('result');
+                    clearChilds('result2');
+
+                    print_colors(colors, 'result');
+
+                    banana1(colors);
+
+                    print_result_colors(colors, 'result2');
+                });
+
+            }
+
+            function loadJS(file, callback) {
+                // DOM: Create the script element
+                var jsElm = document.createElement("script");
+                // set the type attribute
+                jsElm.type = "application/javascript";
+                // make the script element load file
+                jsElm.src = file;
+                jsElm.onload = callback;
+                // finally insert the element to the body element in order to load the script
+                document.body.appendChild(jsElm);
+            }
+
+            function clearChilds(idx) {
+                var myNode = document.getElementById(idx);
+                while (myNode.firstChild) {
+                    myNode.removeChild(myNode.firstChild);
+                }
+            }
+
+        </script>
         <div style="width:450px;height: 60px;margin: auto;background: linear-gradient(90deg, rgb(0, 128, 0) 0%, rgb(255, 255, 0) 62%, rgb(69, 55, 14) 100%, rgb(0, 255, 0) 146%);"></div>
         <div id="result" style="display: inline-block; width: 300px">
 
         </div>
-        <div id="result2" style="display: inline-block; width: 1000px;vertical-align: top;">
+        <div id="result2" style="display: inline-block; width: calc(100% - 330px);vertical-align: top;">
 
         </div>
         <script>
